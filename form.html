@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Formulario de Recomendación</title>
+  </head>
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+    }
+
+    .form-card {
+      max-width: 450px;
+      margin: 40px auto;
+      padding: 30px 40px;
+      background-color: white;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .form-card h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    input[type="text"],
+    select {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #1a73e8;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0c59cf;
+    }
+  </style>
+  <body>
+    <div class="form-card">
+      <h1>Sistema experto de smash</h1>
+      <form id="recomendacionForm">
+        <label
+          >1. ¿Contra qué personaje juegas? (escribe el nombre en minúsculas,
+          espacios con "_")</label
+        ><br />
+        <input
+          type="text"
+          id="enemigo"
+          name="enemigo"
+          required
+          list="personajes"
+        /><br /><br />
+
+        <datalist id="personajes">
+          <option value="bayonetta"></option>
+          <option value="bowser"></option>
+          <option value="bowser_jr"></option>
+          <option value="chrom"></option>
+          <option value="daisy"></option>
+          <option value="doctor_mario"></option>
+          <option value="diddy_kong"></option>
+          <option value="donkey_kong"></option>
+          <option value="falco"></option>
+          <option value="fox"></option>
+          <option value="greninja"></option>
+          <option value="ganondorf"></option>
+          <option value="ice_climbers"></option>
+          <option value="ike"></option>
+          <option value="incineroar"></option>
+          <option value="jigglypuff"></option>
+          <option value="king_dedede"></option>
+          <option value="king_k_rool"></option>
+          <option value="kirby"></option>
+          <option value="link"></option>
+          <option value="lucas"></option>
+          <option value="lucina"></option>
+          <option value="mario"></option>
+          <option value="marth"></option>
+          <option value="mega_man"></option>
+          <option value="ness"></option>
+          <option value="palutena"></option>
+          <option value="pichu"></option>
+          <option value="pikachu"></option>
+          <option value="pit"></option>
+          <option value="ralph"></option>
+          <option value="ridley"></option>
+          <option value="robin"></option>
+          <option value="rob"></option>
+          <option value="samus"></option>
+          <option value="sheik"></option>
+          <option value="shulk"></option>
+          <option value="simon"></option>
+          <option value="snake"></option>
+          <option value="sonic"></option>
+          <option value="toon_link"></option>
+          <option value="wario"></option>
+          <option value="yoshi"></option>
+          <option value="zelda"></option>
+        </datalist>
+
+        <label>2. ¿Qué velocidad prefieres?</label><br />
+        <select name="velocidad" required>
+          <option value="muy_alta">Muy alta</option>
+          <option value="alta">Alta</option>
+          <option value="media">Media</option>
+          <option value="baja">Baja</option></select
+        ><br /><br />
+
+        <label> 3. ¿Qué alcance te gustaría que tuviera tu personaje? </label
+        ><br />
+        <select name="alcance" required>
+          <option value="muy_alta">Muy alta</option>
+          <option value="alta">Alta</option>
+          <option value="media">Media</option>
+          <option value="baja">Baja</option></select
+        ><br /><br />
+
+        <label> 4. ¿Qué fuerza te gustaría que tuviera tu personaje? </label
+        ><br />
+        <select name="fuerza" required>
+          <option value="muy_alta">Muy alta</option>
+          <option value="alta">Alta</option>
+          <option value="media">Media</option>
+          <option value="baja">Baja</option></select
+        ><br /><br />
+
+        <label> 5. ¿Qué dificultad te gustaría que tuviera tu personaje? </label
+        ><br />
+        <select name="dificultad" required>
+          <option value="facil">Fácil</option>
+          <option value="media">Media</option>
+          <option value="avanzada">Avanzada</option></select
+        ><br /><br />
+
+        <label> 6. ¿Qué tipo te gustaría que fuera tu personaje? </label><br />
+        <select name="tipo" required>
+          <option value="zoner">Zoner</option>
+          <option value="rushdown">Rushdown</option>
+          <option value="brawler">Brawler</option>
+          <option value="swordie">Swordie</option>
+          <option value="grappler">Grappler</option></select
+        ><br /><br />
+
+        <label>
+          7. ¿Qué peso te gustaría que tuviera tu personaje? (ligero, medio,
+          pesado) </label
+        ><br />
+        <select name="peso" required>
+          <option value="ligero">Ligero</option>
+          <option value="medio">Medio</option>
+          <option value="pesado">Pesado</option></select
+        ><br /><br />
+
+        <label>
+          8. ¿Qué recuperación te gustaría que tuviera tu personaje? (buena,
+          media, mala) </label
+        ><br />
+        <select name="recuperacion" required>
+          <option value="buena">Buena</option>
+          <option value="media">Media</option>
+          <option value="mala">Mala</option></select
+        ><br /><br />
+
+        <label> 9. ¿Te gustaría que tu personaje tenga proyectiles? </label
+        ><br />
+        <select name="proyectiles" required>
+          <option value="si">Sí</option>
+          <option value="no">No</option></select
+        ><br /><br />
+
+        <label>
+          10. ¿Quieres que tu personaje destaque en el juego aéreo? (si, no) </label
+        ><br />
+        <select name="aereo" required>
+          <option value="si">Sí</option>
+          <option value="no">No</option></select
+        ><br /><br />
+
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="resultadoModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div
+        style="
+          background: white;
+          padding: 20px;
+          border-radius: 5px;
+          max-width: 600px;
+          width: 90%;
+        "
+      >
+        <h2>Resultado</h2>
+        <pre id="modalContenido" style="white-space: pre-wrap"></pre>
+        <button
+          onclick="document.getElementById('resultadoModal').style.display='none'"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("recomendacionForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const form = e.target;
+          const data = {
+            Enemigo: form.enemigo.value,
+            Vel: form.velocidad.value,
+            Alc: form.alcance.value,
+            Fue: form.fuerza.value,
+            Dif: form.dificultad.value,
+            Tip: form.tipo.value,
+            Pes: form.peso.value,
+            Rec: form.recuperacion.value,
+            Pro: form.proyectiles.value,
+            Aer: form.aereo.value,
+          };
+          console.log(data);
+          try {
+            const response = await fetch("http://localhost:5000/recomendar", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            });
+            const toCamelCase = (str) =>
+              str
+                .replace(/_([a-z])/g, (match, letter) => letter.toUpperCase()) // Convierte _a a A
+                .replace(/^./, (match) => match.toLowerCase()); // Asegura que la primera letra sea minúscula
+
+            const result = await response.json();
+            // Convertir el nombre del personaje de snake_case a camelCase
+            const personajeCamelCase = toCamelCase(result.mejor_personaje);
+            Swal.fire({
+              title: "Recomendación",
+              icon: "success",
+              html: `
+    <div style="text-align:left; white-space: pre-wrap;">
+      <strong>Mejor personaje:</strong> ${result.mejor_personaje}<br><br>
+
+       <!-- Imagen debajo del nombre del personaje -->
+      <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${personajeCamelCase}.png" alt="Imagen del personaje" style="max-width: 60%; height: auto; margin-bottom: 10px;">
+      
+
+      <strong>Detalles:</strong><br>
+      ${result.detalles}<br><br>
+
+      <strong>Estadísticas:</strong><br>
+      ${result.Estadisticas}
+    </div>
+  `,
+              width: "60%",
+              confirmButtonText: "Cerrar",
+            });
+          } catch (error) {
+            document.getElementById("resultado").innerText =
+              "Error al conectar con la API.";
+            console.error(error);
+          }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </body>
+</html>
