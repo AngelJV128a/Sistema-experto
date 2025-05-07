@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS  
 from pyswip import Prolog
 import os
+from character_name_formater import character_name_formater
 
 app = Flask(__name__)
 CORS(app) 
@@ -26,7 +27,7 @@ def recomendar():
         prolog.consult("p4 (1).pl")
 
         # Ejecutar la cláusula
-        consulta = f"recomendar_personaje({data['Enemigo']}, {data['Vel']}, {data['Alc']}, {data['Fue']}, {data['Dif']}, {data['Tip']}, {data['Pes']}, {data['Rec']}, {data['Pro']}, {data['Aer']},MejorPersonaje,Detalles,EstadisticasStr)"
+        consulta = f"recomendar_personaje({character_name_formater(data['Enemigo'])}, {data['Vel']}, {data['Alc']}, {data['Fue']}, {data['Dif']}, {data['Tip']}, {data['Pes']}, {data['Rec']}, {data['Pro']}, {data['Aer']},MejorPersonaje,Detalles,EstadisticasStr)"
         result = list(prolog.query(consulta))
 
         if result:
