@@ -74,7 +74,6 @@
           type="text"
           id="enemigo"
           name="enemigo"
-          required
           list="personajes"
         /><br /><br />
 
@@ -261,46 +260,58 @@
           };
           console.log(data);
           try {
-            const response = await fetch("http://localhost:5000/recomendar", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(data),
-            });
             const toCamelCase = (str) =>
               str
                 .replace(/_([a-z])/g, (match, letter) => letter.toUpperCase()) // Convierte _a a A
                 .replace(/^./, (match) => match.toLowerCase()); // Asegura que la primera letra sea minúscula
 
-            const result = await response.json();
-            // Convertir el nombre del personaje de snake_case a camelCase
-            const personajeCamelCase = toCamelCase(result.mejor_personaje);
-            Swal.fire({
-              title: "Recomendación",
-              icon: "success",
-              html: `
-    <div style="text-align:left; white-space: pre-wrap;">
-      <strong>Mejor personaje:</strong> ${result.mejor_personaje}<br><br>
-
-       <!-- Imagen debajo del nombre del personaje -->
-      <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${personajeCamelCase}.png" alt="Imagen del personaje" style="max-width: 60%; height: auto; margin-bottom: 10px;">
-      
-
-      <strong>Detalles:</strong><br>
-      ${result.detalles}<br><br>
-
-      <strong>Estadísticas:</strong><br>
-      ${result.Estadisticas}
-    </div>
-  `,
-              width: "60%",
-              confirmButtonText: "Cerrar",
+            fetch("http://localhost:5000/recomendar", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error("Error en la respuesta de la API");
+              }
+              return response.json();
+            })
+            .then(data => {
+              if (data['recomendacion'] === 'fallida') {
+                Swal.fire({
+                  title: "No se encontró una recomendación adecuada.",
+                  icon: "error",
+                  text: `Motivo: ${data['motivo']}`,
+                  confirmButtonText: "Cerrar",
+                });
+              } else {
+                // Convertir el nombre del personaje de snake_case a camelCase
+                const personajeCamelCase = toCamelCase(data['mejor_personaje']);
+                Swal.fire({
+                  title: "Recomendación",
+                  icon: "success",
+                  html: `
+                    <div style="text-align:left; white-space: pre-wrap;">
+                      <strong>Mejor personaje:</strong> ${data['mejor_personaje']}<br><br>
+                      <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${personajeCamelCase}.png" alt="Imagen del personaje" style="max-width: 60%; height: auto; margin-bottom: 10px;">
+                      <strong>Detalles:</strong><br>
+                      ${data['detalles']}<br><br>
+                      <strong>Estadísticas:</strong><br>
+                      ${data['Estadisticas']}
+                    </div>
+                  `,
+                  width: "60%",
+                  confirmButtonText: "Cerrar",
+                });
+              }
             });
+            
           } catch (error) {
             document.getElementById("resultado").innerText =
               "Error al conectar con la API.";
-            console.error(error);
+          alert(error);
           }
         });
     </script>
