@@ -334,9 +334,14 @@ mostrar_detalles(Personaje,Detalles) :-
         (
             format('Detalles:~n', []),
             format('  - Dificultad: ~w~n', [D]),
-            format('  - Tipo: ~w | Peso: ~w~n', [T, P]),
-            format('  - Velocidad: ~w | Alcance: ~w | Fuerza: ~w~n', [V, A, F]),
-            format('  - Recuperacion: ~w | Proyectiles: ~w | Aereo: ~w~n', [R, Pr, Ae])
+            format('  - Tipo: ~w~n', [T]),
+            format('  - Peso: ~w~n', [P]),
+            format('  - Velocidad: ~w~n', [V]),
+            format('  - Alcance: ~w~n', [A]),
+            format('  - Fuerza: ~w~n', [F]),
+            format('  - Recuperacion: ~w~n', [R]),
+            format('  - Proyectiles: ~w~n', [Pr]),
+            format('  - Aereo: ~w~n', [Ae])
         )
     ).
 

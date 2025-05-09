@@ -5,6 +5,35 @@
     <title>Formulario de Recomendación</title>
   </head>
   <style>
+    .small-title {
+    font-size: 1.4rem !important;  /* Ajusta el valor según necesites */
+    margin: none !important;
+    }
+    .dot {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: #717171;
+    }
+
+    .boton-modal {
+      background-color: #bbb;
+      color: black;
+    }
+
+    .boton-modal:hover{
+      background-color: #717171;
+      color: white;
+    }
+
     body {
       background-color: #f5f5f5;
       font-family: Arial, sans-serif;
@@ -215,7 +244,7 @@
         background-color: rgba(0, 0, 0, 0.5);
         justify-content: center;
         align-items: center;
-      "
+      " 
     >
       <div
         style="
@@ -265,37 +294,142 @@
             });
             const toCamelCase = (str) =>
               str
-                .replace(/_([a-z])/g, (match, letter) => letter.toUpperCase()) // Convierte _a a A
-                .replace(/^./, (match) => match.toLowerCase()); // Asegura que la primera letra sea minúscula
-
+                .replace(/_([a-z])/g, (match, letter) => letter.toUpperCase())
+                .replace(/^./, (match) => match.toLowerCase());
+    
             const result = await response.json();
-            // Convertir el nombre del personaje de snake_case a camelCase
             const personajeCamelCase = toCamelCase(result.mejor_personaje);
+            const enemigoCamelCase = toCamelCase(data.Enemigo);
+            const detallesFormateados = result.detalles
+              .replace(/\n/g, '<br>')  // Mantener saltos de línea
+              .replace(/( - \w+:)/g, '<strong>$1</strong>') ;
+            const estadisticasFormateadas = result.estadisticas
             Swal.fire({
               title: "Recomendación",
-              icon: "success",
+              customClass: {
+                title: 'small-title',  
+              },
               html: `
-    <div style="text-align:left; white-space: pre-wrap;">
-      <strong>Mejor personaje:</strong> ${result.mejor_personaje}<br><br>
+                <div id="carouselModal" style="overflow: hidden;">
+                  <div class="carousel-slide" style="display: flex; transition: transform 0.3s ease; width: 100%;">
+                    <div style="width: 100%; flex-shrink: 0; text-align: left;">
+                      <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                        <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${personajeCamelCase}.png" 
+                             alt="Imagen del personaje" 
+                             style="max-width: 30%; height: auto; margin-block: 15px;">
+                        <strong>${result.mejor_personaje}</strong><br><br>
+                      </div>
+                    </div>
+                    
+                    <div style="width: 100%; flex-shrink: 0; text-align: left;">
+                      <strong>Detalles:</strong><br><br>
+                      <div style="display: flex; justify-content: center; gap: 20%; text-align: center;">
+                        <div style="text-align: left;">
+                          ${detallesFormateados}
+                        </div>
+                        <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${personajeCamelCase}.png" 
+                              alt="Imagen del personaje" 
+                              style="max-width: 25%; height: auto;">
+                      </div>
+                    </div>
+                    
+                    <div style="width: 100%; flex-shrink: 0; text-align: left;">
+                      <center><strong>Estadísticas en combate</strong></center><br>
+                      <div style="display: flex; justify-content: center; align-items: center; gap: 20px; text-align: center; margin-top: 20px">
+                        <!-- Imagen del Personaje Recomendado -->
+                        <div style="flex: 1; text-align: center;">
+                          <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${personajeCamelCase}.png" 
+                              alt="Personaje recomendado" 
+                              style="max-width: 100%; max-height: 200px; object-fit: contain;">
+                        </div>
 
-       <!-- Imagen debajo del nombre del personaje -->
-      <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${personajeCamelCase}.png" alt="Imagen del personaje" style="max-width: 60%; height: auto; margin-bottom: 10px;">
-      
+                        <div style="flex: 0 0 auto;">
+                          <strong style="font-size: 56px;">VS</strong>
+                        </div>
 
-      <strong>Detalles:</strong><br>
-      ${result.detalles}<br><br>
+                        <div style="flex: 1; text-align: center;">
+                          <img src="https://character-sprites.s3.us-east-2.amazonaws.com/${enemigoCamelCase}.png" 
+                              alt="Enemigo" 
+                              style="max-width: 100%; max-height: 200px; object-fit: contain;">
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div style="width: 100%; flex-shrink: 0; text-align: left;">
+                      <strong>Estadísticas:</strong><br>
+                      ${result.Estadisticas.replace(/\n/g, '<br>')}
+                    </div>
+                  </div>
+                </div>
+    
+                <div style="display: flex; justify-content: center; gap: 10px; text-align: center;">
+                  <button id="prevBtn" class="boton-modal">←</button>
+                  <button id="nextBtn" class="boton-modal">→</button>
+                </div>
+                <div id="dots" style="text-align: center; margin-top: 10px;">
+                  <span class="dot active"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              `,
+              didOpen: () => {
+                let currentIndex = 0;
+                const slide = Swal.getPopup().querySelector('.carousel-slide');
+                const dots = Swal.getPopup().querySelectorAll('.dot');
+                const confirmButton = Swal.getConfirmButton(); // Obtener el botón "Cerrar"
 
-      <strong>Estadísticas:</strong><br>
-      ${result.Estadisticas}
-    </div>
-  `,
+                // Ocultar el botón inicialmente
+                confirmButton.style.display = 'none';
+    
+                function updateCarousel() {
+                  slide.style.transform = `translateX(-${currentIndex * 100}%)`;
+                  dots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === currentIndex);
+                  });
+                  
+                  // Mostrar el botón solo en el último slide (índice 2 en este caso)
+                  if (currentIndex === 3) {
+                    confirmButton.style.display = 'block';
+                  } else {
+                    confirmButton.style.display = 'none';
+                  }
+                }
+    
+                Swal.getPopup().querySelector('#prevBtn').addEventListener('click', () => {
+                  if (currentIndex > 0) {
+                    currentIndex--;
+                    updateCarousel();
+                  }
+                });
+    
+                Swal.getPopup().querySelector('#nextBtn').addEventListener('click', () => {
+                  if (currentIndex < 3) {
+                    currentIndex++;
+                    updateCarousel();
+                  }
+                });
+    
+                dots.forEach((dot, idx) => {
+                  dot.addEventListener('click', () => {
+                    currentIndex = idx;
+                    updateCarousel();
+                  });
+                });
+              
+                updateCarousel();
+              },
               width: "60%",
-              confirmButtonText: "Cerrar",
+              showConfirmButton: true,
+              confirmButtonText: "Cerrar"
             });
           } catch (error) {
-            document.getElementById("resultado").innerText =
-              "Error al conectar con la API.";
-            console.error(error);
+            console.error("Error:", error);
+            Swal.fire({
+              title: "Error",
+              text: "Ocurrió un error al procesar la recomendación",
+              icon: "error"
+            });
           }
         });
     </script>
