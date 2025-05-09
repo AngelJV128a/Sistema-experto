@@ -74,6 +74,7 @@
           type="text"
           id="enemigo"
           name="enemigo"
+          required
           list="personajes"
         /><br /><br />
 
@@ -126,6 +127,7 @@
 
         <label>2. ¿Qué velocidad prefieres?</label><br />
         <select name="velocidad" required>
+          <option value="">Selecciona una opción</option>
           <option value="muy_alta">Muy alta</option>
           <option value="alta">Alta</option>
           <option value="media">Media</option>
@@ -135,6 +137,7 @@
         <label> 3. ¿Qué alcance te gustaría que tuviera tu personaje? </label
         ><br />
         <select name="alcance" required>
+          <option value="">Selecciona una opción</option>
           <option value="muy_alta">Muy alta</option>
           <option value="alta">Alta</option>
           <option value="media">Media</option>
@@ -144,6 +147,7 @@
         <label> 4. ¿Qué fuerza te gustaría que tuviera tu personaje? </label
         ><br />
         <select name="fuerza" required>
+          <option value="">Selecciona una opción</option>
           <option value="muy_alta">Muy alta</option>
           <option value="alta">Alta</option>
           <option value="media">Media</option>
@@ -153,6 +157,7 @@
         <label> 5. ¿Qué dificultad te gustaría que tuviera tu personaje? </label
         ><br />
         <select name="dificultad" required>
+          <option value="">Selecciona una opción</option>
           <option value="facil">Fácil</option>
           <option value="media">Media</option>
           <option value="avanzada">Avanzada</option></select
@@ -160,6 +165,7 @@
 
         <label> 6. ¿Qué tipo te gustaría que fuera tu personaje? </label><br />
         <select name="tipo" required>
+          <option value="">Selecciona una opción</option>
           <option value="zoner">Zoner</option>
           <option value="rushdown">Rushdown</option>
           <option value="brawler">Brawler</option>
@@ -172,6 +178,7 @@
           pesado) </label
         ><br />
         <select name="peso" required>
+          <option value="">Selecciona una opción</option>
           <option value="ligero">Ligero</option>
           <option value="medio">Medio</option>
           <option value="pesado">Pesado</option></select
@@ -182,6 +189,7 @@
           media, mala) </label
         ><br />
         <select name="recuperacion" required>
+          <option value="">Selecciona una opción</option>
           <option value="buena">Buena</option>
           <option value="media">Media</option>
           <option value="mala">Mala</option></select
@@ -190,6 +198,7 @@
         <label> 9. ¿Te gustaría que tu personaje tenga proyectiles? </label
         ><br />
         <select name="proyectiles" required>
+          <option value="">Selecciona una opción</option>
           <option value="si">Sí</option>
           <option value="no">No</option></select
         ><br /><br />
@@ -198,11 +207,13 @@
           10. ¿Quieres que tu personaje destaque en el juego aéreo? (si, no) </label
         ><br />
         <select name="aereo" required>
+          <option value="">Selecciona una opción</option>
           <option value="si">Sí</option>
           <option value="no">No</option></select
         ><br /><br />
 
         <button type="submit">Enviar</button>
+        <button type="button" onclick="location.reload();" style="margin-top: 5px; background-color: red;">Borrar respuestas</button>
       </form>
     </div>
 
