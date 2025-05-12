@@ -10,6 +10,8 @@
 %Proyectiles: si, no
 %Aereo: si, no
 
+:- set_prolog_flag(encoding, utf8).
+
 personaje(mario, media, media, media, facil, brawler, medio, buena, si, si).
 personaje(donkey_kong, baja, media, muy_alta, media, grappler, pesado, mala, no, no).
 personaje(link, media, alta, alta, media, zoner, medio, media, si, si).
@@ -210,7 +212,7 @@ preguntar_peso(Peso) :-
     ).
 %8
 preguntar_recuperacion(Recuperacion) :-
-    nl, write('8 ¿Que recuperacion te gustaria que tuviera tu personaje? (buena, media, mala)'), nl, nl,
+    nl, write('8 ¿Que recuperación te gustaria que tuviera tu personaje? (buena, media, mala)'), nl, nl,
     write('Buena: vuelve facilmente al escenario | Media: algo limitada | Mala: vulnerable al caer'), nl, nl,
     read_line_to_string(user_input, Respuesta),
     string_lower(Respuesta, RespuestaLower),
@@ -370,7 +372,7 @@ mostrar_estadisticas(Recomendado, Enemigo) :-
 comparar_velocidad(RVel, EVel) :-
     valor_num(RVel, RNum), valor_num(EVel, ENum),
     (RNum > ENum ->
-    nl, write('  - ¡Eres mas veloz! Esto te ayuda a controlar el ritmo del combate y castigar errores rapidamente.')
+    nl, write('  - ¡Eres más veloz! Esto te ayuda a controlar el ritmo del combate y castigar errores rapidamente.')
     ; true ).
 
 comparar_alcance(RAlc, EAlc) :-
@@ -382,12 +384,12 @@ comparar_alcance(RAlc, EAlc) :-
 comparar_fuerza(RFue, EFue) :-
     valor_num(RFue, RNum), valor_num(EFue, ENum),
     (RNum > ENum ->
-    nl, write('  - ¡Mas fuerte! Tus ataques hacen mayor daño y terminan stocks antes.')
+    nl, write('  - ¡Más fuerte! Tus ataques hacen mayor daño y terminan stocks antes.')
     ; true ).
 
 comparar_tipo(RTip, ETip) :-
     ( mejor_counter_tipo(RTip, ETip, Razon) ->
-        nl, format('  - ~w  ¡Ventaja estrategica! ~w', [RTip, Razon])
+        nl, format('  - ~w  ¡Ventaja estratégica! ~w', [RTip, Razon])
     ; RTip = ETip ->
         nl, format('  - Tipo: Iguales (~w)', [RTip])
     ; true ).
@@ -396,9 +398,9 @@ comparar_peso(RPes, EPes) :-
     valor_peso(RPes, RVal),
     valor_peso(EPes, EVal),
     ( RVal > EVal ->
-        nl, write('  - Eres mas pesado: resistes mas daño, pero eres mas lento.')
+        nl, write('  - Eres más pesado: resistes más daño, pero eres más lento.')
     ; RVal < EVal ->
-        nl, write('  - Eres mas ligero: cuidado con kills tempranos, pero esquivas mejor.')
+        nl, write('  - Eres más ligero: cuidado con kills tempranos, pero esquivas mejor.')
     ;
         true  % No hacer nada si son iguales
     ).
@@ -407,9 +409,9 @@ comparar_recuperacion(RRec, ERec) :-
     valor_recup(RRec, RVal),
     valor_recup(ERec, EVal),
     ( RVal > EVal ->
-        nl, write('  - Tienes mejor recuperacion: vuelves al escenario mas facilmente que tu rival.')
+        nl, write('  - Tienes mejor recuperación: vuelves al escenario mas facilmente que tu rival.')
     ; RVal < EVal ->
-        nl, write('  - El enemigo tiene mejor recuperacion: se agresivo cuando este fuera del escenario.')
+        nl, write('  - El enemigo tiene mejor recuperación: se agresivo cuando este fuera del escenario.')
     ;
         true  % No mostrar nada si son iguales
     ).
@@ -442,7 +444,7 @@ preguntar_repetir :-
     ;
         Respuesta = "" -> repetir  % Si esta vacio, vuelve a preguntar
     ;
-        write('No entendi tu respuesta. Por favor escribe "si" o "no".'), nl,
+        write('No entendí tu respuesta. Por favor escribe "si" o "no".'), nl,
         preguntar_repetir
     ).
 
@@ -501,7 +503,7 @@ valor_peso(ligero, 1).
 valor_peso(medio, 2).
 valor_peso(pesado, 3).
 
-%Valores numericos para recuperacion
+%Valores numericos para recuperación
 valor_recup(buena, 3).
 valor_recup(media, 2).
 valor_recup(mala, 1).
